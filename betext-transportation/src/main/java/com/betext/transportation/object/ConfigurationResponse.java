@@ -21,5 +21,11 @@ public class ConfigurationResponse {
         this.value = value;
     }
 
-
+    @Override
+    public String toString() {
+        return "ConfigurationResponse{" +
+                "key='" + key + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }

@@ -78,6 +78,12 @@ public class BeTEXTClientService {
         return tokenObject;
     }
 
+    /**
+     * sign on then get token
+     * @param userSignOnObject
+     * @return
+     * @throws IOException
+     */
     public static TokenObject signOn(UserSignOnObject userSignOnObject) throws IOException {
         HttpPost method = new HttpPost(userManagementURL + "/signon/");
         ObjectMapper mapper = new ObjectMapper();

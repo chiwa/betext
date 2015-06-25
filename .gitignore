@@ -1,0 +1,27 @@
+mem.*
+*.class
+# Package Files #
+#*.jar
+*.war
+*.ear
+.classpath
+.project
+.settings/
+target/
+.springBeans
+*.ucls
+.lock
+version.ini
+.log
+properties.index
+workingsets.xml
+.metadata/
+MANIFEST.MF
+.idea/
+workspace.xml
+*.iml
+*.scc
+Servers/
+*/output/
+activemq-data/
+/nbactions.xml

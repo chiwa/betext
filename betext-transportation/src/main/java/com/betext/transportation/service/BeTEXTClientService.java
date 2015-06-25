@@ -92,7 +92,6 @@ public class BeTEXTClientService {
         while ((line = rd.readLine()) != null) {
             responseMessage.append(line);
         }
-        System.out.println("xxx > " + responseMessage);
         mapper = new ObjectMapper();
         TokenObject tokenObject = mapper.readValue(responseMessage.toString(), TokenObject.class);
         return tokenObject;
@@ -114,7 +113,7 @@ public class BeTEXTClientService {
       // System.out.println("getAllConfigiruations" + getAllConfigiruations());
       // System.out.println("getConfigurationByKey : " + getConfigurationByKey("name"));
 
-       System.out.println("isValidToken : " + isValidToken("e09aac7e-ae8c-4eeb-b39e-501fd4444374"));
+       System.out.println("isValidToken : " + isValidToken("6d9951c5-e0c6-458a-84cd-6ab0e505f6e6"));
        UserSignOnObject userSignOnObject = new UserSignOnObject();
        userSignOnObject.setUser("chiwa");
        userSignOnObject.setPassword("password");

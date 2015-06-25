@@ -18,7 +18,20 @@
     <bean id="loadConfigurationService" class="com.betext.configuration.service.LoadConfigurationService">
         <property name="configurationPath" value="/data/projects/betext/configuration/betext-centralize-configuration.xml"/>  <!--#001-->
         <property name="localConfiguration" value="betext-centralize-configuration.xml"/>
-
     </bean>
+
+    <!-- enable Spring @Component scan -->
+    <context:component-scan base-package="org.apache.camel.spring.issues.contextscan"/>
+    <camelContext id="camelContext" xmlns="http://camel.apache.org/schema/spring">
+        <!--<camel:package>com.tmn.bpay.business.router</camel:package>-->
+        <contextScan/>
+        <camel:consumerTemplate id="consumer" />
+        <camel:template id="producer"/>
+        <!-- in unit test, only 1 thread should be enough -->
+        <threadPoolProfile id="myDefaultProfile"
+                           defaultProfile="true"
+                           poolSize="1" keepAliveTime="25" maxPoolSize="10" maxQueueSize="2000" rejectedPolicy="CallerRuns"/>
+    </camelContext>
+
 
 </beans>

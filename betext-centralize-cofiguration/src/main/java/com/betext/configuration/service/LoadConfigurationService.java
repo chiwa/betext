@@ -27,6 +27,8 @@ public class LoadConfigurationService {
     public static List<ConfigurationResponse> configurationResponseList = new ArrayList<ConfigurationResponse>();
     private static String configurationPath;
     private static String localConfiguration;
+    private static long lastModify = 0;
+
 
     public static String getConfigurationPath() {
         return configurationPath;
@@ -61,7 +63,7 @@ public class LoadConfigurationService {
         return "null";
     }
 
-    private static synchronized void initConfigurationValue() throws IOException, SAXException, ParserConfigurationException {
+    public static synchronized void initConfigurationValue() throws IOException, SAXException, ParserConfigurationException {
         InputStream inputStream ;
         if (configurationPath == null || !(new File(configurationPath).exists())) {
             String configFile = ("/" + localConfiguration);
@@ -83,6 +85,8 @@ public class LoadConfigurationService {
 
         Document doc = parseXML(inputStream);
         NodeList descNodes = doc.getElementsByTagName("property");
+        result.clear();
+        configurationResponseList.clear();
         for (int i = 0; i < descNodes.getLength(); i++) {
             String key = descNodes.item(i).getAttributes().getNamedItem("key").getTextContent();
             String value = descNodes.item(i).getTextContent();
@@ -103,5 +107,21 @@ public class LoadConfigurationService {
         objDocumentBuilder = objDocumentBuilderFactory.newDocumentBuilder();
         doc = objDocumentBuilder.parse(stream);
         return doc;
+    }
+
+    public static void checkIfNeedReloadConfig() throws ParserConfigurationException, SAXException, IOException {
+          File file = new File(configurationPath);
+          if (!file.exists()) {
+              return;
+          }
+          if (lastModify == 0) {
+            lastModify  = file.lastModified();
+          }
+          if (lastModify != file.lastModified()) {
+              log.info("Configuration was modified need to reload configuration..........");
+              lastModify  = file.lastModified();
+              initConfigurationValue();
+          }
+
     }
 }

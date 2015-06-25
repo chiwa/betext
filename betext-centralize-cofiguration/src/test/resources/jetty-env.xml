@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://www.eclipse.org/jetty/configure.dtd">
+
+<Configure class="org.eclipse.jetty.webapp.WebAppContext">
+
+<!--<New id="bid-itruemart" class="org.eclipse.jetty.plus.jndi.Resource">
+    <Arg></Arg>
+    <Arg>jdbc/bid-itruemart</Arg>
+    <Arg>
+        <New class="oracle.jdbc.pool.OracleDataSource">
+            <Set name="DriverType">thin</Set>
+            <Set name="URL">jdbc:oracle:thin:@10.221.8.49:1521:orcl</Set>
+            <Set name="User">PREPAIDCARD_ROJ</Set>
+            <Set name="Password">PREPAIDCARD_ROJ</Set>
+        </New>
+    </Arg>
+</New>-->
+
+</Configure>

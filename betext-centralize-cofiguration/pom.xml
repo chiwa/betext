@@ -4,51 +4,34 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <parent>
+        <groupId>betext</groupId>
+        <artifactId>betext</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <groupId>betext</groupId>
-    <artifactId>betext</artifactId>
+    <artifactId>betext-centralize-cofiguration</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
-    <properties>
-        <org.springframework.version>4.1.6.RELEASE</org.springframework.version>
-        <springframework.version>4.1.6.RELEASE</springframework.version>
-        <org.slf4j.version>1.6.4</org.slf4j.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <camel.version>2.12.2</camel.version>
-        <cxf.version>2.7.1</cxf.version>
-        <springframework.version>3.2.2.RELEASE</springframework.version>
-        <slf4j.version>1.6.4</slf4j.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <camel.version>2.10.3</camel.version>
-        <pcs.version>1.0.1</pcs.version>
-        <activemq.version>5.8.0</activemq.version>
-        <aspectj.version>1.6.12</aspectj.version>
-        <taglibs.version>1.1.2</taglibs.version>
-        <javax.servlet.version>2.5</javax.servlet.version>
-        <commons-lang.version>2.6</commons-lang.version>
-        <commons-collections.version>3.2.1</commons-collections.version>
-        <cxf.version>2.7.1</cxf.version>
-        <hsqldb.version>2.2.8</hsqldb.version>
-        <!--        <jackson.version>1.9.10</jackson.version>
-                <jackson.databind-version>2.2.3</jackson.databind-version>-->
-    </properties>
-
-    <dependencyManagement>
     <dependencies>
+        <dependency>
+            <groupId>betext</groupId>
+            <artifactId>betext-transportation</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -58,12 +41,10 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-beans</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
-            <version>${springframework.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -74,27 +55,22 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-aop</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jdbc</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-jms</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
-            <version>${springframework.version}</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -110,71 +86,49 @@
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
-            <version>1.2</version>
         </dependency>
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
-            <version>1.4.0</version>
         </dependency>
         <dependency>
             <groupId>commons-httpclient</groupId>
             <artifactId>commons-httpclient</artifactId>
-            <version>3.1</version>
         </dependency>
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>${org.slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${org.slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>${org.slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.8</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-core-asl</artifactId>
-            <version>1.9.13</version>
         </dependency>
         <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-mapper-asl</artifactId>
-            <version>1.9.13</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-core</artifactId>
-            <version>${camel.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-spring</artifactId>
-            <version>${camel.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.camel</groupId>
-            <artifactId>camel-http</artifactId>
-            <version>${camel.version}</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>commons-logging</groupId>
-                    <artifactId>commons-logging</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.apache.camel</groupId>
@@ -184,29 +138,6 @@
         <dependency>
             <groupId>org.apache.camel</groupId>
             <artifactId>camel-cxf</artifactId>
-            <version>${camel.version}</version>
-        </dependency>
-
-        <!-- apache cxf-->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-core</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-api</artifactId>
-            <version>${cxf.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
@@ -217,19 +148,16 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-camel</artifactId>
-            <version>${activemq.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-pool</artifactId>
-            <version>${activemq.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-camel</artifactId>
-            <version>${activemq.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -245,7 +173,6 @@
         <dependency>
             <groupId>org.apache.activemq</groupId>
             <artifactId>activemq-spring</artifactId>
-            <version>${activemq.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>commons-logging</groupId>
@@ -257,10 +184,9 @@
                 </exclusion>
             </exclusions>
         </dependency>
-         <dependency>
+        <!-- <dependency>
              <groupId>org.apache.activemq</groupId>
              <artifactId>activemq-core</artifactId>
-             <version>${activemq.version}</version>
              <exclusions>
                  <exclusion>
                      <groupId>commons-logging</groupId>
@@ -271,15 +197,48 @@
                      <artifactId>commons-logging-api</artifactId>
                  </exclusion>
              </exclusions>
-         </dependency>
+         </dependency>-->
     </dependencies>
-    </dependencyManagement>
 
-    <modules>
-        <module>betext-centralize-cofiguration</module>
-        <module>betext-transportation</module>
-        <module>betext-usermanagement</module>
-        <module>betext-rest</module>
-        <module>betext-billing</module>
-    </modules>
+    <build>
+        <finalName>betext-centralize-configuration</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>3.3</version>
+                <configuration>
+                    <port>9000</port>
+                    <tempWebappDirectory>${basedir}/target/site/tempdir</tempWebappDirectory>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>2.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>maven-jetty-plugin</artifactId>
+                <version>6.1.26</version>
+                <configuration>
+                    <connectors>
+                        <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+                            <port>7777</port>
+                        </connector>
+                    </connectors>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
 </project>

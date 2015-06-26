@@ -79,6 +79,20 @@ public class BeTEXTClientService {
     }
 
     /**
+     * check if token is valid return true otherwise return false
+     * @param token
+     * @return
+     * @throws IOException
+     */
+    public static boolean isValidTokenBoolean(String token) throws IOException {
+        HttpGet getMethod = new HttpGet(userManagementURL + "/isvalidtoken/" + token);
+        StringBuffer responseMessage = getStringBufferGegMethod(getMethod);
+        ObjectMapper mapper = new ObjectMapper();
+        TokenObject tokenObject = mapper.readValue(responseMessage.toString(), TokenObject.class);
+        return (tokenObject.getCustomTokenObject() == null)? false : true;
+    }
+
+    /**
      * sign on then get token
      * @param userSignOnObject
      * @return
@@ -119,7 +133,10 @@ public class BeTEXTClientService {
       // System.out.println("getAllConfigiruations" + getAllConfigiruations());
       // System.out.println("getConfigurationByKey : " + getConfigurationByKey("name"));
 
-       System.out.println("isValidToken : " + isValidToken("6d9951c5-e0c6-458a-84cd-6ab0e505f6e6"));
+       System.out.println("isValidToken : " + isValidToken("a5f1639e-45f0-4748-ad81-22cf78d2e450"));
+        System.out.println("isValidToken : " + isValidToken("a5f1639e-45f0-4748-ad81-22cf78d2e450x"));
+        System.out.println("isValidTokenBoolean : " + isValidTokenBoolean("a5f1639e-45f0-4748-ad81-22cf78d2e450"));
+        System.out.println("isValidTokenBoolean : " + isValidTokenBoolean("a5f1639e-45f0-4748-ad81-22cf78d2e450x"));
        UserSignOnObject userSignOnObject = new UserSignOnObject();
        userSignOnObject.setUser("chiwa");
        userSignOnObject.setPassword("password");

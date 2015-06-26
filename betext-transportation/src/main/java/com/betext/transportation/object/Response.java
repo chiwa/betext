@@ -1,6 +1,8 @@
 package com.betext.transportation.object;
 
-public class Response {
+import java.io.Serializable;
+
+public class Response  implements Serializable {
 
     private int responseCode;
     private String responseDescription;

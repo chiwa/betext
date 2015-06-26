@@ -1,7 +1,9 @@
 package com.betext.transportation.object;
 
 
-public class TokenObject {
+import java.io.Serializable;
+
+public class TokenObject  implements Serializable {
 
     private String token = null;
     private long expireTime = 0;

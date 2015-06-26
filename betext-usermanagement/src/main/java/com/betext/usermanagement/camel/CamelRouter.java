@@ -20,14 +20,26 @@ public class CamelRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        int intervalInMinute = (60 * 1000) * 5;
+        /*int intervalInMinute = (60 * 1000) * 5;
         from("timer://clearExpireToken?period=" + intervalInMinute)
                 .routeId("clearExpireToken")
                 .process(new Processor() {
                     @Override
                     public void process(Exchange exchange) throws Exception {
                         log.info("Timer to clear expired token......");
-                        tokenAuthenticationService.clearExpiredToken();
+                        tokenAuthenticationService.clearAllTokenOnceAday();
+                    }
+                })
+                .end();*/
+
+        String cron = "0 59 23 ? * *";
+        from("quartz://reconcile?fireNow=false&stateful=true&cron=" + cron + "&trigger.repeatCount=-1")
+                .id("clearToken")
+                .process(new Processor() {
+                    @Override
+                    public void process(Exchange exchange) throws Exception {
+                        log.info("Scheduler to clear token......");
+                        tokenAuthenticationService.clearAllTokenOnceADay();
                     }
                 })
                 .end();

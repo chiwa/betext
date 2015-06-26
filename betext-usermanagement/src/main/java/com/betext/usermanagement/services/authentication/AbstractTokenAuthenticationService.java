@@ -3,6 +3,8 @@ package com.betext.usermanagement.services.authentication;
 import com.betext.transportation.Exception.TokenAuthenticationException;
 import com.betext.transportation.constant.ResponseCode;
 import com.betext.transportation.object.TokenObject;
+import com.betext.transportation.service.MemcachedClientService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.*;
 
@@ -13,7 +15,7 @@ public abstract class AbstractTokenAuthenticationService {
     protected static final String INVALID_TOKEN = "Invalid Token.";
     protected static final int ONE_MINUTE_IN_MILISEC = 60000;
     public static final String SIGN_ON_FAILED = "Sign on failed.";
-    protected Map<String, TokenObject> tokenMap = new HashMap<String, TokenObject>();
+    //protected Map<String, TokenObject> tokenMap = new HashMap<String, TokenObject>();
     private String errorMessage = null;
 
     public String getErrorMessage() {
@@ -24,6 +26,8 @@ public abstract class AbstractTokenAuthenticationService {
         this.errorMessage = errorMessage;
     }
 
+    @Autowired
+    private MemcachedClientService memcachedClientService;
 
 
     /**
@@ -34,8 +38,8 @@ public abstract class AbstractTokenAuthenticationService {
      */
     public TokenObject isValidToken(String token) {
         TokenObject result = new TokenObject();
-        if (tokenMap.containsKey(token)) {
-            result = tokenMap.get(token);
+        if (memcachedClientService.get(token) != null) {
+            result = (TokenObject) memcachedClientService.get(token);
             long millisNow = System.currentTimeMillis();
             if (millisNow > result.getExpireTime()) {
                 //Token Expired
@@ -65,18 +69,8 @@ public abstract class AbstractTokenAuthenticationService {
     /**
      * This method should be use by scheduler or timer to clear all expired tokens.
      */
-    public synchronized void clearExpiredToken() {
-        List<String> keyList = new ArrayList<String>();
-        for (Object key : tokenMap.keySet()) {
-            keyList.add(key.toString());
-        }
-        long millisNow = System.currentTimeMillis();
-        for (String key : keyList) {
-            long tokenTime = tokenMap.get(key).getExpireTime();
-            if (millisNow > tokenTime) {
-                tokenMap.remove(key);
-            }
-        }
+    public synchronized void clearAllTokenOnceADay() {
+       memcachedClientService.clearAll();
     }
 
 
@@ -88,7 +82,7 @@ public abstract class AbstractTokenAuthenticationService {
         tokenObject.setCustomTokenObject(customToken);
         String token = generateToken();
         tokenObject.setToken(token);
-        tokenMap.put(token, tokenObject);
+        memcachedClientService.set(token, tokenObject);
         return tokenObject;
     }
 

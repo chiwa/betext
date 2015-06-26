@@ -1,7 +1,9 @@
 package com.betext.transportation.object;
 
 
-public class UserSignOnObject {
+import java.io.Serializable;
+
+public class UserSignOnObject  implements Serializable {
     private String user;
     private String password;
 

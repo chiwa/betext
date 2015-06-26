@@ -1,7 +1,9 @@
 package com.betext.transportation.object;
 
 
-public class ConfigurationResponse {
+import java.io.Serializable;
+
+public class ConfigurationResponse  implements Serializable {
     private String key;
     private String value;
 

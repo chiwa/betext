@@ -29,13 +29,14 @@
         <camel:consumerTemplate id="consumer" />
         <camel:template id="producer"/>
         <!-- in unit test, only 1 thread should be enough -->
+
         <threadPoolProfile id="myDefaultProfile"
                            defaultProfile="true"
-                           poolSize="1" keepAliveTime="25" maxPoolSize="1" maxQueueSize="2000" rejectedPolicy="CallerRuns"/>
+                           poolSize="10" keepAliveTime="25" maxPoolSize="1000" maxQueueSize="2000" rejectedPolicy="CallerRuns"/>
     </camelContext>
 
     <!-- When disposed, it will try to stop Camel Context, then the camel context can gracefully stopped -->
-    <bean class="com.betext.usermanagement.camel.GracefullyStopCamelContext"/>
+    <bean class="com.betext.transportation.service.GracefullyStopCamelContext"/>
 
     <!-- JMS ConnectionFactory to use, configuring the embedded broker using XML
     <amq:connectionFactory id="tmn-connectionFactory" brokerURL="tcp://localhost:61616" password="" user=""/>

@@ -4,6 +4,7 @@ package com.betext.usermanagement.controller;
 import com.betext.transportation.Exception.TokenAuthenticationException;
 import com.betext.transportation.object.TokenObject;
 import com.betext.transportation.object.UserSignOnObject;
+import com.betext.transportation.service.MemcachedClientService;
 import com.betext.usermanagement.services.authentication.ImpTokenAuthenticationService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -20,6 +21,9 @@ public class RestController {
 
     @Autowired
     private ImpTokenAuthenticationService tokenAuthenticationService;
+
+    @Autowired
+    private MemcachedClientService memcachedClientService;
 
     /**
      * Do authentication is token valid or not
@@ -68,5 +72,12 @@ public class RestController {
             tokenObject.setDescription(ex.getMessage());
         }
         return tokenObject;
+    }
+
+    @RequestMapping(value = "/ping", method = RequestMethod.GET)
+    public @ResponseBody String Ping() throws IOException {
+        String str = (String) memcachedClientService.get("foo");
+        System.out.println("===>>> " + str);
+        return "pong";
     }
 }

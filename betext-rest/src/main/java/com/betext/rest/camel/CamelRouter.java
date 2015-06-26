@@ -14,6 +14,9 @@ public class CamelRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-
+        from("seda:test")
+                .threads(20)
+                .bean(HelloBean.class)
+                .end();
     }
 }

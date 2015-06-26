@@ -1,4 +1,4 @@
-package com.betext.rest.camel;
+package com.betext.transportation.service;
 
 import org.apache.camel.CamelContext;
 import org.slf4j.Logger;

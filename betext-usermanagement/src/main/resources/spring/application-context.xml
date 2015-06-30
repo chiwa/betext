@@ -13,7 +13,10 @@
         http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core.xsd
         http://camel.apache.org/schema/cxf http://camel.apache.org/schema/cxf/camel-cxf.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
+    <import resource="spring-profile.xml"/>
     <context:component-scan base-package="com.betext.**" />
+
+
 
     <!-- enable Spring @Component scan -->
     <context:component-scan base-package="org.apache.camel.spring.issues.contextscan"/>
@@ -27,16 +30,10 @@
                            poolSize="100" keepAliveTime="25" maxPoolSize="100" maxQueueSize="2000" rejectedPolicy="CallerRuns"/>
     </camelContext>
 
-    <bean id="memcachedClientService" class="com.betext.transportation.service.MemcachedClientService">
-        <property name="server" value="127.0.0.1"/>
-        <property name="port" value="11211"/>
-    </bean>
 
     <!-- Aspect -->
     <bean id="serviceLoggingAspect" class="com.betext.usermanagement.services.authentication.ServiceLoggingAspect" />
-
     <aop:config>
-
         <aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
             <!-- @Before -->
             <aop:pointcut id="doServicePointCut" expression="execution(* com.betext.usermanagement.controller.RestController.*(..))" />
@@ -44,15 +41,16 @@
             <!-- @After -->
             <aop:after method="logAfter" pointcut-ref="doServicePointCut" />
         </aop:aspect>
-
-        <!--<aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
-            &lt;!&ndash; @Before &ndash;&gt;
-            <aop:pointcut id="doServicePointCut" expression="execution(* com.betext.usermanagement.services.authentication.AbstractTokenAuthenticationService.*(..))" />
-            <aop:before method="logBefore" pointcut-ref="doServicePointCut" />
-            &lt;!&ndash; @After &ndash;&gt;
-            <aop:after method="logAfter" pointcut-ref="doServicePointCut" />
-        </aop:aspect>-->
-
     </aop:config>
+
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
+
 
 </beans>

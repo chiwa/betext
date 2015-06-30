@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--mvn jetty:run -Dspring.profiles.active="demo".-->
+
+    <beans profile="production">
+        <import resource="spring-config-production.xml"/>
+    </beans>
+
+    <beans profile="test">
+        <import resource="spring-config-test.xml"/>
+    </beans>
+</beans>

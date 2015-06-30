@@ -42,9 +42,9 @@ public class MemcachedClientService implements InitializingBean {
         pool = SockIOPool.getInstance();
         pool.setServers(servers);
         pool.getAliveCheck();
-        pool.setInitConn(5);
-        pool.setMinConn(5);
-        pool.setMaxConn(250);
+        pool.setInitConn(20);
+        pool.setMinConn(20);
+        pool.setMaxConn(500);
         pool.setMaxIdle(1000 * 60 * 60 * 6);
         pool.setMaintSleep(30);
         pool.setNagle(false);

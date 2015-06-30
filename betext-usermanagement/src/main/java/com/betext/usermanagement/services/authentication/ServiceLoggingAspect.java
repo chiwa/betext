@@ -21,10 +21,7 @@ public class ServiceLoggingAspect {
     private final Logger log = LogManager.getLogger(ServiceLoggingAspect.class);
 
     public void logBefore(JoinPoint joinPoint) {
-        String declareTypeName = joinPoint.getSignature().getDeclaringTypeName();
-        String pointName = (declareTypeName + "." + joinPoint.getSignature().getName());
         Object[] pointParams = joinPoint.getArgs();
-
         Map<String, Object> params = new HashMap<String, Object>();
         Date currentTime = new Date(System.currentTimeMillis());
         BigDecimal startCall = new BigDecimal(currentTime.getTime());

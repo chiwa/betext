@@ -32,7 +32,7 @@
 
 
     <!-- Aspect -->
-    <bean id="serviceLoggingAspect" class="com.betext.usermanagement.services.authentication.ServiceLoggingAspect" />
+    <bean id="serviceLoggingAspect" class="com.betext.transportation.service.ServiceLoggingAspect" />
     <aop:config>
         <aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
             <!-- @Before -->

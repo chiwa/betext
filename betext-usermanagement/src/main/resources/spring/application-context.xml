@@ -36,16 +36,22 @@
     <bean id="serviceLoggingAspect" class="com.betext.usermanagement.services.authentication.ServiceLoggingAspect" />
 
     <aop:config>
-        <aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
 
+        <aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
             <!-- @Before -->
-            <aop:pointcut id="doServicePointCut"
-                          expression="execution(* com.betext.usermanagement.controller.RestController.*(..))" />
+            <aop:pointcut id="doServicePointCut" expression="execution(* com.betext.usermanagement.controller.RestController.*(..))" />
             <aop:before method="logBefore" pointcut-ref="doServicePointCut" />
             <!-- @After -->
             <aop:after method="logAfter" pointcut-ref="doServicePointCut" />
-
         </aop:aspect>
+
+        <!--<aop:aspect id="aspectLoggging" ref="serviceLoggingAspect" >
+            &lt;!&ndash; @Before &ndash;&gt;
+            <aop:pointcut id="doServicePointCut" expression="execution(* com.betext.usermanagement.services.authentication.AbstractTokenAuthenticationService.*(..))" />
+            <aop:before method="logBefore" pointcut-ref="doServicePointCut" />
+            &lt;!&ndash; @After &ndash;&gt;
+            <aop:after method="logAfter" pointcut-ref="doServicePointCut" />
+        </aop:aspect>-->
 
     </aop:config>
 
